@@ -1,0 +1,19 @@
+<!-- src/main/resources/templates/movies/create.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Movie</title>
+</head>
+<body>
+    <h1>Add Movie</h1>
+    <form action="/movies/create" method="post" th:object="${movie}">
+        <label>Title:</label>
+        <input type="text" th:field="*{title}" /><br/>
+        <label>Genre:</label>
+        <input type="text" th:field="*{genre}" /><br/>
+        <label>Duration (minutes):</label>
+        <input type="number" th:field="*{duration}" /><br/>
+        <button type="submit">Save</button>
+    </form>
+</body>
+</html>
