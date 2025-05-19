@@ -1,0 +1,21 @@
+<!-- src/main/resources/templates/movies/list.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Movie List</title>
+</head>
+<body>
+    <h1>Movie List</h1>
+    <a href="/movies/create">Add Movie</a>
+    <ul>
+    <th:block th:each="movie : ${movies}">
+        <li>
+            <span th:text="${movie.title}"></span> | 
+            <span th:text="${movie.genre}"></span> |
+            <a th:href="@{/movies/edit/{id}(id=${movie.movieId})}">Edit</a> |
+            <a th:href="@{/movies/delete/{id}(id=${movie.movieId})}">Delete</a>
+        </li>
+    </th:block>
+</ul>
+</body>
+</html>

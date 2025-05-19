@@ -1,0 +1,16 @@
+<!-- src/main/resources/templates/movies/create.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Movie</title>
+</head>
+<body>
+    <h1>Add Movie</h1>
+    <form action="/movies/create" method="post">
+        <input type="text" name="title" placeholder="Movie Title" required/>
+        <input type="text" name="genre" placeholder="Genre" required/>
+        <input type="date" name="releaseDate" required/>
+        <button type="submit">Create Movie</button>
+    </form>
+</body>
+</html>
