@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package config;
+package com.pbo.movie_ticket.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pbo.movie_ticket.model.Movie;
@@ -31,7 +31,12 @@ public class MovieDataLoader implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         InputStream is = getClass().getResourceAsStream("/moviesData.json");
+        if (is == null) {
+            System.out.println("ERROR: moviesData.json not found!");
+            return;
+        }
         List<Movie> movies = Arrays.asList(objectMapper.readValue(is, Movie[].class));
         movieRepository.saveAll(movies);
+        
     }
 }

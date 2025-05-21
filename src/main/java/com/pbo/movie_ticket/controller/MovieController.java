@@ -30,13 +30,32 @@ public class MovieController {
     }
 
     // REST API — Get a movie by ID (JSON)
+//    @GetMapping("/{movieId}")
+//    @ResponseBody
+//    public Movie getMovieById(@PathVariable String movieId) {
+//        return movieService.getMovieById(movieId);
+//        
+//    }
+    
+//    @GetMapping("/{movieId}/view")
+//    public String showMovieDetailPage(@PathVariable String movieId, Model model) {
+//        Movie movie = movieService.getMovieById(movieId);
+//        model.addAttribute("movie", movie);
+//        return "movie-detail"; 
+//    }
     @GetMapping("/{movieId}")
-    @ResponseBody
-    public Movie getMovieById(@PathVariable String movieId) {
-        return movieService.getMovieById(movieId);
+    public String getMovieDetail(@PathVariable String movieId, Model model) {
+        try {
+            Movie movie = movieService.getMovieById(movieId);
+            model.addAttribute("movie", movie);
+            return "movie-detail"; // your Thymeleaf template
+        } catch (RuntimeException e) {
+            model.addAttribute("errorMessage", e.getMessage());
+            return "404"; // custom error page view
+        }
     }
 
-    // REST API — Add a new movie (JSON)
+        // REST API — Add a new movie (JSON)
     @PostMapping
     @ResponseBody
     public Movie addMovie(@RequestBody Movie movie) {

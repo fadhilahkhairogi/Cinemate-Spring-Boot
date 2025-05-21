@@ -34,6 +34,7 @@ public class MovieService {
 
     // Find a movie by ID
     public Movie getMovieById(String movieId) {
-        return movieRepository.findById(movieId).orElse(null);
+        return movieRepository.findById(movieId)
+               .orElseThrow(() -> new RuntimeException("Movie not found with ID: " + movieId));
     }
 }
