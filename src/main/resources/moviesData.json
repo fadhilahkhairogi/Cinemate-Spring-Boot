@@ -1,0 +1,46 @@
+[
+    {
+      "movieId": "m1",
+      "title": "Jumbo",
+      "genres": ["Horror"],
+      "releaseDate": "2025-05-01",
+      "duration": "120 mins",
+      "schedule": ["2025-05-01T00:00:00"],
+      "posterUrl": "url_to_jumbo.jpg",
+      "description": "Film jumbo"
+    },
+    {
+      "movieId": "m2",
+      "title": "Pahlawan Perisai",
+      "genres": ["Action", "Adventure"],
+      "releaseDate": "2025-08-21",
+      "duration": "140 mins",
+      "schedule": [
+        "2025-08-21T00:00:00",
+        "2025-08-21T09:00:00"
+      ],
+      "posterUrl": "url_to_perisai.jpg",
+      "description": "Prajurit super dengan perisai bintang"
+    },
+    {
+      "movieId": "m3",
+      "title": "Dokter Aneh",
+      "genres": ["Fantasy", "Horror"],
+      "releaseDate": "2025-11-11",
+      "duration": "125 mins",
+      "schedule": ["2025-11-11T00:00:00"],
+      "posterUrl": "url_to_dokter.jpg",
+      "description": "Penyihir ahli waktu dan dunia paralel"
+    },
+    {
+      "movieId": "m4",
+      "title": "Mainan Ceria",
+      "genres": ["Animation"],
+      "releaseDate": "2025-10-05",
+      "duration": "90 mins",
+      "schedule": ["2025-10-05T10:30:00"],
+      "posterUrl": "url_to_mainan.jpg",
+      "description": "Mainan yang hidup saat manusia tak melihat"
+    }
+  ]
+  

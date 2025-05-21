@@ -1,10 +1,18 @@
 package com.pbo.movie_ticket.model;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "movie")
@@ -17,19 +25,32 @@ public class Movie {
     @Column(name = "title")
     private String title;
 
+    @ElementCollection
+    @CollectionTable(name = "movie_genres", joinColumns = @JoinColumn(name = "movie_id"))
     @Column(name = "genre")
-    private String genre;
+    private List<String> genres = new ArrayList<>();;
 
     @Column(name = "release_date")
     private LocalDate releaseDate;
 
     @Column(name = "duration")
     private String duration;
+    
+    @ElementCollection
+    @CollectionTable(name = "movie_schedule", joinColumns = @JoinColumn(name = "movie_id"))
+    @Column(name = "scheduled_time")
+    private List<LocalDateTime> schedule;
+    
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Seat> seats = new ArrayList<>();
 
     @Column(name = "poster_url")
     private String posterUrl;
+    
+    @Column(name = "description", columnDefinition = "TEXT") // TEXT allows long descriptions
+    private String description;
 
-    // Getters and Setters
+    // ✅ Corrected Getters and Setters
     public String getMovieId() {
         return movieId;
     }
@@ -46,12 +67,12 @@ public class Movie {
         this.title = title;
     }
 
-    public String getGenre() {
-        return genre;
+    public List<String> getGenres() {
+        return genres;
     }
 
-    public void setGenre(String genre) {
-        this.genre = genre;
+    public void setGenres(List<String> genres) {
+        this.genres = genres;
     }
 
     public LocalDate getReleaseDate() {
