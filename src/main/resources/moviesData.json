@@ -1,6 +1,5 @@
 [
     {
-      "movieId": "m1",
       "title": "Jumbo",
       "genres": ["Horror"],
       "releaseDate": "2025-05-01",
@@ -10,7 +9,6 @@
       "description": "Film jumbo"
     },
     {
-      "movieId": "m2",
       "title": "Pahlawan Perisai",
       "genres": ["Action", "Adventure"],
       "releaseDate": "2025-08-21",
@@ -23,7 +21,6 @@
       "description": "Prajurit super dengan perisai bintang"
     },
     {
-      "movieId": "m3",
       "title": "Dokter Aneh",
       "genres": ["Fantasy", "Horror"],
       "releaseDate": "2025-11-11",
@@ -33,8 +30,7 @@
       "description": "Penyihir ahli waktu dan dunia paralel"
     },
     {
-      "movieId": "m4",
-      "title": "Mainan Ceria",
+      "title": "Cerita Mainan 5",
       "genres": ["Animation"],
       "releaseDate": "2025-10-05",
       "duration": "90 mins",

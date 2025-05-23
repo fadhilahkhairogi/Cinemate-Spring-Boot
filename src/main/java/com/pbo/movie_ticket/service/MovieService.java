@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Service
 public class MovieService {
@@ -20,6 +21,14 @@ public class MovieService {
     // Retrieve all movies
     public List<Movie> getAllMovies() {
         return movieRepository.findAll();
+    }
+    
+    public List<Movie> searchMovies(String title) {
+        return movieRepository.findByTitleContainingIgnoreCase(title.trim());
+    }
+    
+    public List<Movie> filterGenreMovies(String genre) {
+        return movieRepository.findByGenresContainingIgnoreCase(genre.trim());
     }
 
     // Add a new movie

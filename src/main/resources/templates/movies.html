@@ -91,7 +91,7 @@
     }
     .movie-card {
       position: relative;
-      border-radius: 0.5rem;
+      border-radius: 0.5rem; 
       overflow: hidden;
       cursor: pointer;
       box-shadow: 0 0 8px rgba(62, 166, 255, 0.3);
@@ -202,7 +202,26 @@
     .social-icons a:hover {
       color: #3ea6ff;
     }
-    /* Scrollbar for movie grid if needed */
+
+    .custom-alert {
+      background-color: #0f2a4a;
+      color: #f0f0f0;
+      border: 1px solid #3ea6ff;
+      padding: 0.75rem 1rem;
+      border-radius: 0.375rem;
+      margin-top: 1rem;
+      font-weight: 500;
+      box-shadow: 0 0 10px rgba(62, 166, 255, 0.2);
+      animation: fadeIn 0.3s ease-in-out;
+      display: inline-block;
+      max-width: 100%;      
+      word-wrap: break-word;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-5px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
     .movie-grid::-webkit-scrollbar {
       height: 6px;
     }
@@ -210,14 +229,18 @@
       background-color: #3ea6ff;
       border-radius: 3px;
     }
+
   </style>
 </head>
 <body>
   <!-- Navbar -->
   <nav class="navbar d-flex justify-content-between align-items-center">
-    <a href="#" class="navbar-brand"><span>CINE</span>MATE</a>
-    <form class="d-flex flex-grow-1 mx-3" role="search">
-      <input class="form-control" type="search" placeholder="Search movies" aria-label="Search movies" />
+    <a th:href="@{'/movies/view'}" class="navbar-brand"><span>CINE</span>MATE</a>
+
+    <!-- Serach Form -->
+    <form class="d-flex flex-grow-1 mx-3" th:action="@{/movies/search}" method="get" role="search">
+      <input class="form-control me-2" type="search" name="title" placeholder="Search movies" aria-label="Search movies" />
+      <button class="btn btn-outline-light" type="submit">Search</button>
     </form>
     <a href="#" class="text-white fs-4"><i class="fas fa-user-circle"></i></a>
   </nav>
@@ -252,16 +275,23 @@
       </div>
     </div>
 
+<!-- Message for search results -->
+<div th:if="${message}" class="custom-alert" th:text="${message}"></div>
+
+
 <!-- Movie Grid -->
 <div class="movie-grid mt-3">
   <div class="movie-card" th:each="movie : ${movies}" tabindex="0"
        th:aria-label="${movie.title} + ' - ' + ${#strings.arrayJoin(movie.genres, ', ')} + ' - ' + ${movie.duration}">
-    <img th:src="@{${movie.posterUrl}}" th:alt="${movie.title}" class="movie-poster" />
+        <a th:href="@{'/movies/' + ${movie.movieId}}">
+          <img th:src="@{${movie.posterUrl}}" th:alt="${movie.title}" class="movie-poster" />
+        
     <div class="movie-info">
       <!-- Show only the first two genres -->
       <span class="genre" th:text="${#strings.arrayJoin(movie.genres.subList(0, T(java.lang.Math).min(2, movie.genres.size())), ', ')}">Genre</span>
       <span class="duration" th:text="${movie.duration}">Duration</span>
     </div>
+    </a>
   </div>
 </div>
 
@@ -278,7 +308,7 @@
       </div>
       <div class="footer-column">
         <ul>
-          <li><a href="#">MOVIES</a></li>
+          <li><a th:href="@{'/movies/view'}" >MOVIES</a></li>
           <li><a href="#">F&amp;B</a></li>
           <li><a href="#">CINEMA</a></li>
         </ul>
