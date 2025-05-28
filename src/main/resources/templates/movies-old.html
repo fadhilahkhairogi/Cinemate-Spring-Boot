@@ -82,108 +82,58 @@
       margin-right: 0.5rem;
       user-select: none;
     }
-    @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-5px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.movie-grid {
-  margin-top: 1rem;
-  margin-bottom: 3rem;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 1.5rem;
-  padding: 0 1rem;
-}
-
-.movie-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #0b1e2d;
-  border-radius: 0.75rem;
-  overflow: hidden;
-  box-shadow: 0 2px 10px rgba(62, 166, 255, 0.15);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  animation: fadeIn 0.5s ease;
-  cursor: pointer;
-  padding-bottom: 1rem;
-}
-
-.movie-card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 20px rgba(62, 166, 255, 0.6);
-}
-
-.movie-poster {
-  width: 100%;
-  object-fit: cover;
-  aspect-ratio: 2/3;
-  border-radius: 0.75rem 0.75rem 0 0;
-}
-
-.movie-info {
-  margin-top: 0.75rem;
-  text-align: center;
-  color: #f0f0f0;
-  font-size: 0.875rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-
-.movie-info .title {
-  font-weight: 600;
-  font-size: 0.95rem;
-  color: #ffffff;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.movie-info .details {
-  display: flex;
-  justify-content: center;
-  gap: 0.4rem;
-  flex-wrap: wrap;
-}
-
-.movie-info .genre,
-.movie-info .duration,
-.movie-info .age {
-  background-color: #3ea6ff;
-  color: #000;
-  padding: 0.2rem 0.5rem;
-  border-radius: 0.25rem;
-  font-size: 0.6rem;
-  font-weight: 600;
-  white-space: nowrap;
-}
-.movie-info .duration {
-  background-color: #071422;
-  color: #fff;
-}
-/* .movie-info .age {
-  background-color: #ff4757;
-  color: #fff;
-} */
-.poster-container {
-  position: relative;
-  width: 100%;
-}
-
-.overlay-title {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  background: rgba(0, 0, 0, 0.6);
-  color: #ffffff;
-  font-weight: bold;
-  text-align: center;
-  padding: 0.5rem;
-  font-size: 0.95rem;
-  border-radius: 0 0 0.75rem 0.75rem;
-}
+    .movie-grid {
+      margin-top: 1rem;
+      margin-bottom: 3rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 1rem;
+    }
+    .movie-card {
+      position: relative;
+      border-radius: 0.5rem; 
+      overflow: hidden;
+      cursor: pointer;
+      box-shadow: 0 0 8px rgba(62, 166, 255, 0.3);
+      transition: transform 0.3s ease;
+    }
+    .movie-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(62, 166, 255, 0.6);
+    }
+    .movie-poster {
+      width: 100%;
+      display: block;
+      border-radius: 0.5rem;
+      object-fit: cover;
+      aspect-ratio: 2/3;
+    }
+    .movie-info {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(180deg, transparent, rgba(0,0,0,0.85));
+      color: #f0f0f0;
+      padding: 0.4rem 0.5rem 0.5rem 0.5rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+      border-radius: 0 0 0.5rem 0.5rem;
+    }
+    .movie-info .genre {
+      background-color: #3ea6ff;
+      padding: 0 0.3rem;
+      border-radius: 0.25rem;
+      white-space: nowrap;
+    }
+    .movie-info .duration {
+      background-color: #071422;
+      padding: 0 0.3rem;
+      border-radius: 0.25rem;
+      white-space: nowrap;
+    }
     .footer {
       background-color: #071422;
       padding: 2rem 1.5rem 1rem 1.5rem;
@@ -334,20 +284,15 @@
 <div class="movie-grid mt-3">
   <div class="movie-card" th:each="movie : ${movies}" tabindex="0"
        th:aria-label="${movie.title} + ' - ' + ${#strings.arrayJoin(movie.genres, ', ')} + ' - ' + ${movie.duration}">
-       <div class="poster-container">
         <a th:href="@{'/movies/' + ${movie.movieId}}">
           <img th:src="@{${movie.posterUrl}}" th:alt="${movie.title}" class="movie-poster" />
-          <div class="overlay-title" th:text="${movie.title}">Movie Title</div>
-        </a>
-      </div>
+        
     <div class="movie-info">
-      <!-- <div class="title" th:text="${movie.title}">Movie Title</div> -->
-      <div class="details">
-        <span class="genre" th:text="${#strings.arrayJoin(movie.genres.subList(0, T(java.lang.Math).min(2, movie.genres.size())), '/')}">Genre</span>
-        <span class="duration" th:text="${movie.duration}">1h 45m</span>
-        <!-- <span class="age" th:text="${movie.ageRating}">13+</span> -->
-      </div>
+      <!-- Show only the first two genres -->
+      <span class="genre" th:text="${#strings.arrayJoin(movie.genres.subList(0, T(java.lang.Math).min(2, movie.genres.size())), ', ')}">Genre</span>
+      <span class="duration" th:text="${movie.duration}">Duration</span>
     </div>
+    </a>
   </div>
 </div>
 

@@ -177,13 +177,13 @@
     <a th:href="@{'/movies/view'}" class="navbar-brand"><span>CINE</span>MATE</a>
 
     <!-- Serach Form -->
-    <form class="d-flex align-items-center ms-auto me-2" th:action="@{/movies/search}" method="get" role="search" style="width: 25%;">
-      <button class="btn btn-outline-light btn-sm me-2" type="submit"><i class="fas fa-search"></i></button>
-      <input class="form-control form-control-sm " type="search" name="title" placeholder="Search" aria-label="Search movies" />
+    <form class="d-flex flex-grow-1 mx-3" th:action="@{/movies/search}" method="get" role="search">
+      <input class="form-control me-2" type="search" name="title" placeholder="Search movies" aria-label="Search movies" />
+      <button class="btn btn-outline-light" type="submit">Search</button>
     </form>
-<a href="#" class="text-white fs-4 ms-3"><i class="fas fa-user-circle"></i></a>
-</nav>
-  
+    <a href="#" class="text-white fs-4"><i class="fas fa-user-circle"></i></a>
+  </nav>
+
   <!-- Movie Details -->
   <div class="container movie-details-container">
     <div class="row g-5">
@@ -193,25 +193,25 @@
       <div class="col-md-8">
         <div class="movie-title" th:text="${movie.title}">Movie Title</div>
         <div class="movie-meta">
-          <!-- <strong>Description:</strong> -->
-          <span th:text="${movie.description}">Film terlaris sepanjang masa.</span>
-        </div>
-        <!-- <div class="movie-meta">
           <strong>Release Date:</strong> <span th:text="${movie.releaseDate}">2024-12-12</span>
-        </div> -->
-        <div class="movie-meta">
-          <span th:text="${#strings.arrayJoin(movie.genres, '/')} + ' • ' + ${movie.duration}">Action/Comedy • 2h 15m</span>
         </div>
-        <!-- <div class="movie-meta">
+        <div class="movie-meta">
+          <strong>Duration:</strong> <span th:text="${movie.duration}">2h 15m</span>
+        </div>
+        <div class="movie-meta">
           <strong>Genres:</strong>
           <span th:each="genre : ${movie.genres}" class="badge badge-genre" th:text="${genre}">Action</span>
-        </div> -->
+        </div>
         <div class="movie-schedule">
           <strong>Schedule:</strong>
           <ul class="schedule-list">
             <li th:each="time : ${movie.schedule}" th:text="${#temporals.format(time, 'dd MMM yyyy HH:mm')}">20 May 2024 14:00</li>
           
           </ul>
+        </div>
+        <div class="movie-meta">
+          <strong>Description:</strong>
+          <span th:text="${movie.description}">Film terlaris sepanjang masa.</span>
         </div>
       </div>
     </div>

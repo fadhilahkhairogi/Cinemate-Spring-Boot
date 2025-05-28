@@ -54,10 +54,10 @@ public class Movie {
     @Column(name = "poster_url")
     private String posterUrl;
     
-    @Column(name = "description", columnDefinition = "TEXT") // TEXT allows long descriptions
+    @Column(name = "description", columnDefinition = "TEXT") 
     private String description;
 
-    // ✅ Corrected Getters and Setters
+
     public Long getMovieId() {
         return movieId;
     }

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${movie.title} ? ${movie.title} + ' Ticket Booking' : 'Movie Ticket Booking'">Movie Ticket Booking</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="ticket-selection-panel">
+            <h2>Select Tickets</h2>
+            <div class="dropdown">
+                <select>
+                    <option>None</option>
+                    </select>
+            </div>
+
+            <div class="screen-legend">
+                <div class="legend-item">
+                    <span class="seat-box available"></span> Available
+                </div>
+                <div class="legend-item">
+                    <span class="seat-box taken"></span> Taken
+                </div>
+                <div class="legend-item">
+                    <span class="seat-box selected"></span> Selected
+                </div>
+            </div>
+
+            <div class="screen-area">
+                <div class="screen-indicator">SCREEN</div>
+                <div class="seat-grid">
+                    <div class="row-labels">
+                        <div th:each="rowChar : ${#numbers.sequence(65, 74)}" th:text="${#strings.substring(#char.of(rowChar), 0, 1)}"></div> </div>
+                    <div class="seat-columns">
+                        <div th:each="col : ${#numbers.sequence(1, 12)}" th:text="${col}"></div>
+                    </div>
+                    <div class="seats">
+                        <div class="seat available"></div>
+                        <div class="seat available"></div>
+                        <div class="seat available"></div>
+                        <div class="seat taken"></div>
+                        <div class="seat taken"></div>
+                        <div class="seat available"></div>
+                        <div class="seat available"></div>
+                        <div class="seat available"></div>
+                        <div class="seat taken"></div>
+                        <div class="seat taken"></div>
+                        <div class="seat available"></div>
+                        <div class="seat available"></div>
+
+                        <div class="seat available"></div>
+                        <div class="seat available"></div>
+                        <div class="seat taken"></div>
+                        <div class="seat taken"></div>
+                        <div class="seat available"></div>
+                        <div class="seat available"></div>
+                        <div class="seat available"></div>
+                        <div class="seat taken"></div>
+                        <div class="seat taken"></div>
+                        <div class="seat available"></div>
+                        <div class="seat available"></div>
+                        <div class="seat available"></div>
+
+                        <div class="seat available"></div>
+                        <div class="seat taken"></div>
+                        <div class="seat taken"></div>
+                        <div class="seat available"></div>
+                        <div class="seat available"></div>
+                        <div class="seat available"></div>
+                        <div class="seat available"></div>
+                        <div class="seat available"></div>
+                        <div class="seat taken"></div>
+                        <div class="seat taken"></div>
+                        <div class="seat available"></div>
+                        <div class="seat available"></div>
+
+                        <div class="seat available"></div>
+                        <div class="seat available"></div>
+                        <div class="seat available"></div>
+                        <div class="seat available"></div>
+                        <div class="seat available"></div>
+                        <div class="seat taken"></div>
+                        <div class="seat taken"></div>
+                        <div class="seat available"></div>
+                        <div class="seat available"></div>
+                        <div class="seat available"></div>
+                        <div class="seat available"></div>
+                        <div class="seat available"></div>
+
+                        <div class="seat available"></div>
+                        <div class="seat available"></div>
+                        <div class="seat taken"></div>
+                        <div class="seat taken"></div>
+                        <div class="seat available"></div>
+                        <div class="seat available"></div>
+                        <div class="seat available"></div>
+                        <div class="seat available"></div>
+                        <div class="seat taken"></div>
+                        <div class="seat taken"></div>
+                        <div class="seat available"></div>
+                        <div class="seat available"></div>
+
+                        <div class="seat available"></div>
+                        <div class="seat available"></div>
+                        <div class="seat available"></div>
+                        <div class="seat taken"></div>
+                        <div class="seat taken"></div>
+                        <div class="seat available"></div>
+                        <div class="seat available"></div>
+                        <div class="seat available"></div>
+                        <div class="seat available"></div>
+                        <div class="seat available"></div>
+                        <div class="seat available"></div>
+                        <div class="seat available"></div>
+
+                        <div class="seat available"></div>
+                        <div class="seat taken"></div>
+                        <div class="seat taken"></div>
+                        <div class="seat available"></div>
+                        <div class="seat available"></div>
+                        <div class="seat available"></div>
+                        <div class="seat available"></div>
+                        <div class="seat available"></div>
+                        <div class="seat taken"></div>
+                        <div class="seat taken"></div>
+                        <div class="seat available"></div>
+                        <div class="seat available"></div>
+
+                        <div class="seat available"></div>
+                        <div class="seat available"></div>
+                        <div class="seat available"></div>
+                        <div class="seat available"></div>
+                        <div class="seat available"></div>
+                        <div class="seat taken"></div>
+                        <div class="seat taken"></div>
+                        <div class="seat available"></div>
+                        <div class="seat available"></div>
+                        <div class="seat available"></div>
+                        <div class="seat available"></div>
+                        <div class="seat available"></div>
+
+                        <div class="seat available"></div>
+                        <div class="seat available"></div>
+                        <div class="seat taken"></div>
+                        <div class="seat taken"></div>
+                        <div class="seat available"></div>
+                        <div class="seat available"></div>
+                        <div class="seat available"></div>
+                        <div class="seat available"></div>
+                        <div class="seat taken"></div>
+                        <div class="seat taken"></div>
+                        <div class="seat available"></div>
+                        <div class="seat available"></div>
+
+                        <div class="seat available"></div>
+                        <div class="seat available"></div>
+                        <div class="seat available"></div>
+                        <div class="seat available"></div>
+                        <div class="seat available"></div>
+                        <div class="seat available"></div>
+                        <div class="seat available"></div>
+                        <div class="seat available"></div>
+                        <div class="seat available"></div>
+                        <div class="seat available"></div>
+                        <div class="seat available"></div>
+                        <div class="seat available"></div>
+
+                    </div>
+                </div>
+            </div>
+            <button class="pick-seat-button">PICK SEAT</button>
+        </div>
+
+        <div class="detail-tickets-panel">
+            <h2>Detail Tickets</h2>
+            <div class="form-group">
+                <label>Movie</label>
+                <input type="text" th:value="${movie.title}" readonly>
+            </div>
+            <div class="form-group">
+                <label>Date</label>
+                <input type="text" th:value="${movie.date}" readonly>
+            </div>
+            <div class="form-group">
+                <label>Time</label>
+                <input type="text" th:value="${movie.time}" readonly>
+            </div>
+            <div class="form-group">
+                <label>Seat</label>
+                <input type="text" th:value="${movie.selectedSeats}" readonly>
+            </div>
+            <div class="form-group">
+                <label>Cinema</label>
+                <input type="text" th:value="${movie.cinema}" readonly>
+            </div>
+            <div class="form-group">
+                <label>Estimated Price</label>
+                <input type="text" th:value="${movie.price}" readonly>
+            </div>
+            <button class="checkout-button">CHECKOUT</button>
+            <div class="or-separator">OR</div>
+            <button class="add-food-button">+ Add Food & Beverage</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const seats = document.querySelectorAll('.seat-grid .seats .seat.available');
+            const selectedSeatsInput = document.querySelector('.detail-tickets-panel input[th\\:value=\\"${movie.selectedSeats}\\"]'); // Targeting the Thymeleaf placeholder for dynamic ID
+
+            let selectedSeats = [];
+
+            seats.forEach(seat => {
+                seat.addEventListener('click', () => {
+                    if (seat.classList.contains('available')) {
+                        seat.classList.toggle('selected');
+                        updateSelectedSeats();
+                    }
+                });
+            });
+
+            function updateSelectedSeats() {
+                selectedSeats = [];
+                document.querySelectorAll('.seat-grid .seats .seat.selected').forEach(selectedSeat => {
+                    // This part is a simplification. In a real app, you'd map the index to actual row/column
+                    const seatIndex = Array.from(seats).indexOf(selectedSeat);
+                    const row = String.fromCharCode(65 + Math.floor(seatIndex / 12));
+                    const col = (seatIndex % 12) + 1;
+                    selectedSeats.push(${row}${col});
+                });
+                if (selectedSeatsInput) {
+                    selectedSeatsInput.value = selectedSeats.join(', ');
+                }
+            }
+        });
+    </script>
+</body>
+</html>
