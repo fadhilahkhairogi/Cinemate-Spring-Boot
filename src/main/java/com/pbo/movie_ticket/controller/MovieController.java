@@ -24,11 +24,32 @@ public class MovieController {
 
     // Return Thymeleaf HTML view (GET /movies/view)
     @GetMapping("/view")
-    public String showMoviesPage(Model model) {
-        List<Movie> movies = movieService.getAllMovies();
-        model.addAttribute("movies", movies);
-        return "movies"; 
+public String showMoviesPage(
+    @RequestParam(value = "filter-genre", required = false) String genre,
+    @RequestParam(value = "title", required = false) String title,
+    Model model) {
+
+    List<Movie> movies;
+
+    if (genre != null && !genre.isEmpty()) {
+        movies = movieService.filterGenreMovies(genre.trim());
+        if (movies.isEmpty()) {
+            model.addAttribute("message", "No movies found for genre: " + genre);
+            movies = movieService.getAllMovies();
+        }
+    } else if (title != null && !title.isEmpty()) {
+        movies = movieService.searchMovies(title.trim());
+        if (movies.isEmpty()) {
+            model.addAttribute("message", "No movies found for title: " + title);
+            movies = movieService.getAllMovies();
+        }
+    } else {
+        movies = movieService.getAllMovies();
     }
+
+    model.addAttribute("movies", movies);
+    return "movies";
+}
 
     // REST API — Get a movie by ID (JSON)
 //    @GetMapping("/{movieId}")
@@ -79,8 +100,8 @@ public class MovieController {
 
     
     @GetMapping("/genre")
-    public String showMoviesGenre(@RequestParam("genre") String genre,  Model model) {
-        if (genre == null || genre.equals("None")) {
+    public String showMoviesGenre(@RequestParam(value = "filter-genre", required = false) String genre,  Model model) {
+        if (genre == null || genre.isEmpty()) {
             List<Movie> movies = movieService.getAllMovies();
             model.addAttribute("movies", movies);
             return "movies";
@@ -94,7 +115,7 @@ public class MovieController {
             model.addAttribute("movies", movies);
             return "movies";
         }
-        model.addAttribute("message", "Movie genre: '" + genre + "'.");
+//        model.addAttribute("message", "Movie genre: '" + genre + "'.");
         model.addAttribute("movies", results);
         return "movies"; 
     }

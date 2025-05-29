@@ -28,7 +28,7 @@ public class MovieService {
     }
     
     public List<Movie> filterGenreMovies(String genre) {
-        return movieRepository.findByGenresContainingIgnoreCase(genre.trim());
+        return movieRepository.findByGenre(genre.trim());
     }
 
     // Add a new movie
