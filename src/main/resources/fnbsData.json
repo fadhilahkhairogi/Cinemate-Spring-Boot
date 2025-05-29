@@ -1,0 +1,72 @@
+[
+  {
+    "name": "Popcorn Caramel",
+    "type": "Snack",
+    "price": 25000,
+    "posterUrl": "/images/cinemate_movie.jpg",
+    "description": "Sedap"
+  },
+  {
+    "name": "Popcorn Butter",
+    "type": "Snack",
+    "price": 22000,
+    "posterUrl": "/images/cinemate_movie.jpg",
+    "description": "Sedap"
+  },
+  {
+    "name": "Cola Regular",
+    "type": "Drink",
+    "price": 15000,
+    "posterUrl": "/images/cinemate_movie.jpg",
+    "description": "Segar"
+  },
+  {
+    "name": "Cola Large",
+    "type": "Drink",
+    "price": 20000,
+    "posterUrl": "/images/cinemate_movie.jpg",
+    "description": "Segar"
+  },
+  {
+    "name": "Teh Manis",
+    "type": "Drink",
+    "price": 12000,
+    "posterUrl": "/images/cinemate_movie.jpg",
+    "description": "Segar"
+  },
+  {
+    "name": "Air Mineral",
+    "type": "Drink",
+    "price": 10000,
+    "posterUrl": "/images/cinemate_movie.jpg",
+    "description": "Segar"
+  },
+  {
+    "name": "Burger Mini",
+    "type": "Snack",
+    "price": 30000,
+    "posterUrl": "/images/cinemate_movie.jpg",
+    "description": "Sedap"
+  },
+  {
+    "name": "Sosis Bakar",
+    "type": "Snack",
+    "price": 18000,
+    "posterUrl": "/images/cinemate_movie.jpg",
+    "description": "Sedap"
+  },
+  {
+    "name": "French Fries Regular",
+    "type": "Snack",
+    "price": 20000,
+    "posterUrl": "/images/cinemate_movie.jpg",
+    "description": "Sedap"
+  },
+  {
+    "name": "French Fries Large",
+    "type": "Snack",
+    "price": 24000,
+    "posterUrl": "/images/cinemate_movie.jpg",
+    "description": "Sedap"
+  }
+]

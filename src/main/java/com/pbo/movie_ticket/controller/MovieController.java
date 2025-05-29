@@ -35,7 +35,7 @@ public String showMoviesPage(
     boolean hasTitle = title != null && !title.isBlank();
 
     if (hasGenre && hasTitle) {
-        // Filter by title first, then filter by genre in-memory (or vice versa)
+
         List<Movie> byTitle = movieService.searchMovies(title.trim());
         movies = byTitle.stream()
                 .filter(m -> m.getGenres().stream()

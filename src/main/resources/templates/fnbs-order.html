@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FnB</title>
+    <style>
+        html {
+            background: radial-gradient(circle at top left, #002b43, #001528);
+            width: auto;
+            height: auto;
+        }
+
+        .header-container {
+            background: radial-gradient(circle at top left, #002b43, #001528);
+            height: 10vh;
+        }
+
+        .content {
+            background-color: white;
+            border: 20px solid #00A6FF;
+            border-radius: 25px;
+            width: auto;
+            height: auto;
+            margin: 20px 50px 100px 50px; /* top, right, bottom, left */
+            padding-bottom: 30px;
+            box-sizing: border-box;
+        }
+
+        .title {
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            background: radial-gradient(circle at top left, #00A6FF, #001528);
+            color: white;
+            width: 450px;
+            height: auto;
+            padding: 10px 10px 10px 10px;
+            margin: 20px 0 20px 40px; /* top,right,bottom,left */
+        }
+
+        .menu {
+            width: 100%;
+            height: auto;
+            margin: 0 auto;
+        }
+
+        .row-menu {
+            flex-wrap: wrap;
+            display: flex;
+            justify-content: center;
+            height: auto;
+            width: auto;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            margin-bottom: 25px;
+            gap: 15px;
+        }
+
+        .type {
+            flex: 0 0 auto;
+            scroll-snap-align: start;
+            border-radius: 10px;
+            padding: 10px;
+            margin: 0 5px;
+            background: #f8faff;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+            min-width: 320px;
+        }
+
+        .type-name {
+            display: flex;
+            margin-left: 15px;
+            margin-bottom: 8px;
+            font-weight: 700;
+            font-size: 1.2em;
+            color: #333;
+        }
+
+        .isi-menu {
+            margin-left: 10px;
+            margin-right: 10px;
+            border: 2px solid #00A6FF;
+            border-radius: 20px;
+            list-style-type: none;
+            width: auto;
+            height: auto;
+            display: flex;
+            background: white;
+            padding: 12px 10px;
+        }
+
+        .foto {
+            width: 100px;
+            padding: 5px;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .foto-menu {
+            border: 2px solid #00A6FF;
+            width: 100px;
+            height: 100px;
+            padding: 5px;
+            border-radius: 20px;
+            object-fit: cover;
+        }
+
+        .harga-menu {
+            width: 100px;
+            padding: 5px;
+            display: flex;
+            margin-top: 8px;
+            margin-left: 5px;
+            justify-content: center;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .text-menu {
+            justify-content: right;
+            padding-left: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            flex: 1;
+        }
+
+        .text-menu h4 {
+            margin: 4px 0;
+        }
+
+        .tombol {
+            background-color: #999;
+            border: 1px solid black;
+            border-radius: 20px;
+            display: flex;
+            width: 95px;
+            height: 35px;
+            justify-content: center;
+            align-items: center;
+            margin-top: 60px;
+            gap: 10px;
+            user-select: none;
+            margin-left: 50px;
+        }
+
+        .bulat {
+            border: 1px solid #026194;
+            border-radius: 25px;
+            display: flex;
+            background-color: #026194;
+            height: 25px;
+            width: 25px;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.1em;
+            cursor: pointer;
+            user-select: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .bulat:hover {
+            background-color: #014c6f;
+            border-color: #014c6f;
+        }
+
+        .bayar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 25px;
+            gap: 20px;
+            flex-wrap: wrap;
+            padding: 0 20px;
+        }
+
+        .total-price {
+            padding-left: 250px;
+            padding-right: 220px;
+            display: flex;
+            margin-top: 10px;
+            border-radius: 16px;
+            border: 2px solid #00A6FF;
+            width: 100%;
+            max-width: 500px;
+            height: 65px;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            font-size: 1.3em;
+            color: #333;
+            background: white;
+        }
+
+        .checkout {
+            background: radial-gradient(circle at top left, #00A6FF, #001528);
+            color: white;
+            display: flex;
+            margin-top: 10px;
+            margin-left: 0;
+            justify-content: center;
+            align-items: center;
+            border-radius: 16px;
+            border: 2px solid #00A6FF;
+            width: 353px;
+            height: 73px;
+            font-size: 1.5em;
+            font-weight: bold;
+            cursor: pointer;
+            user-select: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .checkout:hover {
+            background-color: #004977;
+            border-color: #004977;
+        }
+
+        .footer-container {
+            background: radial-gradient(circle at top left, #002b43, #001528);
+            height: 20vh;
+        }
+    </style>
+</head>
+<body>
+    <div class="header-container"></div>
+    <div class="content">
+        <div class="title">
+            <img th:src="a.png" height="80px" alt="Logo" />
+            <h1>Select Food &amp; Beverage</h1>
+        </div>
+        <div class="menu">
+            <div class="row-menu" th:each="fnb : ${fnbs}" tabindex="0">
+                <div class="type">
+                    <h2 class="type-name" th:text="${fnb.type}">TYPE</h2>
+                    <div class="isi-menu">
+                        <div class="foto">
+                            <img class="foto-menu" th:src="@{${fnb.posterUrl}}" alt="FnB Image" />
+                            <div class="harga-menu" th:text="'Rp. ' + ${#numbers.formatDecimal(fnb.price, 0, 'COMMA', 2, 'POINT')}">Rp. 0</div>
+                        </div>
+                        <div class="text-menu">
+                            <h4 th:text="${fnb.name}">Item Name</h4>
+                            <h4 th:text="${fnb.description}">Item Description</h4>
+                            <div class="tombol">
+                                <button class="bulat" type="button" th:onclick="'decrementQuantity(' + ${fnb.fnb_id} + ')'">-</button>
+                                <div class="jumlah-pesanan" th:text="${fnb.quantity}">0</div>
+                                <button class="bulat" type="button" th:onclick="'incrementQuantity(' + ${fnb.fnb_id} + ')'">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bayar">
+                <div class="total-price">
+                    <h3>Total Price: Rp. <span th:text="${totalPrice}">0</span></h3>
+                </div>
+                <button class="checkout" type="submit">CHECKOUT</button>
+            </div>
+        </div>
+    </div>
+    <div class="footer-container"></div>
+    <script th:inline="javascript">
+        function incrementQuantity(id) {
+            window.location.href = /*[[${'/fnb/increment/' + id}]]*/ '/fnb/increment/' + id;
+        }
+        function decrementQuantity(id) {
+            window.location.href = /*[[${'/fnb/decrement/' + id}]]*/ '/fnb/decrement/' + id;
+        }
+    </script>
+</body>
+</html>
+
+
