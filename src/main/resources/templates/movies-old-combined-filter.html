@@ -316,42 +316,61 @@
   </style>
 </head>
 <body>
-  <!-- Navbar -->
-  <nav class="navbar d-flex justify-content-between align-items-center">
-    <a th:href="@{'/movies/view'}" class="navbar-brand"><span>CINE</span>MATE</a>
-
-    <!-- Search Form -->
-
-    <form class="d-flex align-items-center ms-auto me-2" th:action="@{/movies/view}" method="get" role="search" style="width: 25%;">
-      <button class="btn btn-outline-light btn-sm me-2" type="submit"><i class="fas fa-search"></i></button>
-      <input class="form-control form-control-sm bg-secondary text-white" type="search" name="title" placeholder="Search" aria-label="Search movies" />
-    </form>
-  <a href="#" class="text-white fs-4 ms-3"><i class="fas fa-user-circle"></i></a>
-  </nav>
-
-  <!-- Filters -->
+<!-- ───────────── open the form just after the brand ───────────── -->
+<nav class="navbar d-flex justify-content-between align-items-center">
+    <a th:href="@{/movies/view}" class="navbar-brand"><span>CINE</span>MATE</a>
+  
+    <!-- one single FORM spans navbar + the genre row -->
+    <form th:action="@{/movies/view}" method="get" role="search" style="width:100%;"
+          class="d-flex flex-column">   <!-- flex-column keeps rows independent -->
+  
+        <!-- ── NAVBAR ROW (search box) ────────────────────────────── -->
+        <div class="d-flex align-items-center ms-auto me-2" style="width:25%;">
+          <button class="btn btn-outline-light btn-sm me-2" type="submit">
+            <i class="fas fa-search"></i>
+          </button>
+  
+          <input class="form-control form-control-sm bg-secondary text-white"
+                 type="search" name="title" placeholder="Search"
+                 aria-label="Search movies" th:value="${param.title}" />
+        </div>
+  
+        <!-- leave the user-icon outside the form so its layout stays -->
+        <a href="#" class="text-white fs-4 ms-3"><i class="fas fa-user-circle"></i></a>
+  </nav> <!-- nav closes, but <form> is still OPEN -->
+  
+  <!-- ───────────── GENRE ROW (still inside the same form) ───────────── -->
   <div class="container mt-4">
     <div class="d-flex flex-wrap align-items-center gap-3">
       <div>
         <button type="button" class="btn btn-toggle active">Now Showing</button>
         <button type="button" class="btn btn-toggle">Upcoming</button>
       </div>
-      <form th:action="@{/movies/view}" method="get">
+  
+      <!-- genre dropdown -->
       <div class="d-flex align-items-center gap-2">
-          <label for="filter-genre" class="filter-label"><i class="fas fa-filter"></i> Genre</label>
-          <input type="hidden" name="title" th:value="${param.title}" />
-          <select id="filter-genre" class="filter-select form-select form-select-sm" name="filter-genre"  onchange="this.form.submit()">
-            <option value="">None</option>
-            <option value="action">Action</option>
-            <option value="comedy">Comedy</option>
-            <option value="drama">Drama</option>
-            <option value="horror">Horror</option>
-            <option value="animation">Animation</option>
-            <option value="fantasy">Fantasy</option>
-          </select>
-        </div>
-      </form>
+        <label for="filter-genre" class="filter-label mb-0">
+          <i class="fas fa-filter"></i> Genre
+        </label>
+  
+        <select id="filter-genre" name="filter-genre"
+                class="filter-select form-select form-select-sm"
+                onchange="this.form.submit()"     <!-- same form submits -->
+                th:value="${param['filter-genre']}">
+          <option value="">None</option>
+          <option value="action">Action</option>
+          <option value="comedy">Comedy</option>
+          <option value="drama">Drama</option>
+          <option value="horror">Horror</option>
+          <option value="animation">Animation</option>
+          <option value="fantasy">Fantasy</option>
+        </select>
+      </div>
     </div>
+  </div>
+  
+  </form> <!-- close the single form AFTER the genre row -->
+  
 
 <!-- Message for search results -->
 <div th:if="${message}" class="custom-alert" th:text="${message}"></div>

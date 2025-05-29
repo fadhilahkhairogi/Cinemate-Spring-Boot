@@ -23,7 +23,7 @@ public class MovieController {
     }
 
     // Return Thymeleaf HTML view (GET /movies/view)
-    @GetMapping("/view")
+@GetMapping("/view")
 public String showMoviesPage(
     @RequestParam(value = "filter-genre", required = false) String genre,
     @RequestParam(value = "title", required = false) String title,
@@ -31,18 +31,36 @@ public String showMoviesPage(
 
     List<Movie> movies;
 
-    if (genre != null && !genre.isEmpty()) {
+    boolean hasGenre = genre != null && !genre.isBlank();
+    boolean hasTitle = title != null && !title.isBlank();
+
+    if (hasGenre && hasTitle) {
+        // Filter by title first, then filter by genre in-memory (or vice versa)
+        List<Movie> byTitle = movieService.searchMovies(title.trim());
+        movies = byTitle.stream()
+                .filter(m -> m.getGenres().stream()
+                        .anyMatch(g -> g.equalsIgnoreCase(genre.trim())))
+                .toList();
+
+        if (movies.isEmpty()) {
+            model.addAttribute("message", "No movies found matching title '" + title + "' and genre '" + genre + "'.");
+            movies = movieService.getAllMovies();
+        }
+
+    } else if (hasGenre) {
         movies = movieService.filterGenreMovies(genre.trim());
         if (movies.isEmpty()) {
             model.addAttribute("message", "No movies found for genre: " + genre);
             movies = movieService.getAllMovies();
         }
-    } else if (title != null && !title.isEmpty()) {
+
+    } else if (hasTitle) {
         movies = movieService.searchMovies(title.trim());
         if (movies.isEmpty()) {
             model.addAttribute("message", "No movies found for title: " + title);
             movies = movieService.getAllMovies();
         }
+
     } else {
         movies = movieService.getAllMovies();
     }
