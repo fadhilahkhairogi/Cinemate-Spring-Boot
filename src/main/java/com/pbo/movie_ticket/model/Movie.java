@@ -11,12 +11,15 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.MapKeyColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 @Entity
 @Table(name = "movie")
@@ -48,15 +51,46 @@ public class Movie {
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private List<LocalDateTime> schedule;
     
-    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Seat> seats = new ArrayList<>();
+    @ElementCollection(fetch = FetchType.LAZY)
+    @CollectionTable(name = "movie_seats", joinColumns = @JoinColumn(name = "movie_id"))
+    @MapKeyColumn(name = "seat_number")
+    @Column(name = "is_available")
+    private Map<String, Boolean> seats = new LinkedHashMap<>();
 
     @Column(name = "poster_url")
     private String posterUrl;
     
     @Column(name = "description", columnDefinition = "TEXT") 
     private String description;
-
+    
+    public Movie(){
+        initializeSeats();
+    }
+    
+    public Movie(String title, List<String> genres, LocalDate releaseDate, String duration,
+                 List<LocalDateTime> schedule, String posterUrl, String description) {
+        this.title = title;
+        this.genres = genres;
+        this.releaseDate = releaseDate;
+        this.duration = duration;
+        this.schedule = schedule;
+        this.posterUrl = posterUrl;
+        this.description = description;
+        initializeSeats();
+    }
+    
+    
+    
+    private void initializeSeats() {
+        for (char row = 'A'; row <= 'K'; row++) {
+            for (int col = 1; col <= 13; col++) {
+                String seat = row + String.valueOf(col);
+                seats.put(seat, true); // all seats available initially
+            }
+        }
+    }
+    
+    
 
     public Long getMovieId() {
         return movieId;
@@ -114,13 +148,14 @@ public class Movie {
         this.schedule = schedule;
     }
 
-    public List<Seat> getSeats() {
+    public Map<String, Boolean> getSeats() {
         return seats;
     }
 
-    public void setSeats(List<Seat> seats) {
+    public void setSeats(Map<String, Boolean> seats) {
         this.seats = seats;
     }
+
 
     public String getDescription() {
         return description;

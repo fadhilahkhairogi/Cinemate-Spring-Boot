@@ -84,7 +84,7 @@ public String showMoviesPage(
 //        return "movie-detail"; 
 //    }
     @GetMapping("/{movieId}")
-    public String getMovieDetail(@PathVariable String movieId, Model model) {
+    public String getMovieDetail(@PathVariable Long movieId, Model model) {
         try {
             Movie movie = movieService.getMovieById(movieId);
             model.addAttribute("movie", movie);
@@ -153,7 +153,7 @@ public String showMoviesPage(
     // REST API — Delete a movie (JSON)
     @DeleteMapping("/{movieId}")
     @ResponseBody
-    public void deleteMovie(@PathVariable String movieId) {
+    public void deleteMovie(@PathVariable Long movieId) {
         movieService.deleteMovie(movieId);
     }
 }

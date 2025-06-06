@@ -6,12 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Service
 public class MovieService {
 
     private final MovieRepository movieRepository;
+    
 
     @Autowired
     public MovieService(MovieRepository movieRepository) {
@@ -37,13 +39,38 @@ public class MovieService {
     }
 
     // Delete a movie
-    public void deleteMovie(String movieId) {
+    public void deleteMovie(Long movieId) {
         movieRepository.deleteById(movieId);
     }
 
     // Find a movie by ID
-    public Movie getMovieById(String movieId) {
+    public Movie getMovieById(Long movieId) {
         return movieRepository.findById(movieId)
                .orElseThrow(() -> new RuntimeException("Movie not found with ID: " + movieId));
     }
+    
+//    public boolean isSeatAvailable(Long movieId, String seatNumber) {
+//        Movie movie = movieRepository.findById(movieId);
+//        return movie.getSeats().getOrDefault(seatNumber, false);
+//    }
+
+//    public boolean bookSeat(Long movieId, String seatNumber) {
+//        Movie movie = movieRepository.findById(movieId);
+//        if (movie.getSeats().getOrDefault(seatNumber, false)) {
+//            movie.getSeats().put(seatNumber, false);
+//            movieRepository.save(movie); // persist the update
+//            return true;
+//        }
+//        return false;
+//    }
+
+//    public boolean cancelSeat(Long movieId, String seatNumber) {
+//        Optional<Movie> movie = movieRepository.findById(movieId);
+//        if (movie.getSeats().containsKey(seatNumber) && !movie.getSeats().get(seatNumber)) {
+//            movie.getSeats().put(seatNumber, true);
+//            movieRepository.save(movie); // persist the update
+//            return true;
+//        }
+//        return false;
+//    } 
 }
