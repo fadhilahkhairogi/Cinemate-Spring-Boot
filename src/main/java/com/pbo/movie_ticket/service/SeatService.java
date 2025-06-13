@@ -19,7 +19,7 @@ public class SeatService {
     private MovieRepository movieRepo;
 
     // Get seats for a movie's schedule time
-    public List<Seat> getSeatsByMovieAndSchedule(String movieId, LocalDateTime scheduleTime) {
+    public List<Seat> getSeatsByMovieAndSchedule(Long movieId, LocalDateTime scheduleTime) {
         Movie movie = movieRepo.findById(movieId)
             .orElseThrow(() -> new RuntimeException("Movie not found"));
         return seatRepo.findByMovieAndScheduleTime(movie, scheduleTime);

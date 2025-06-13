@@ -26,7 +26,7 @@ public class Fnb {
     private String type;
 
     @Column(name = "price")
-    private double price;
+    private Integer price;
 
     @Column(name = "poster_url")
     private String posterUrl;
@@ -62,7 +62,7 @@ public class Fnb {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(Integer price) {
         this.price = price;
     }
 

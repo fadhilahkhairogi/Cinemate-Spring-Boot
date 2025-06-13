@@ -20,7 +20,7 @@ public class FnbService {
 
     // Retrieve all movies
     public List<Fnb> getAllFnbs() {
-        return fnbRepository.findAll();
+        return fnbRepository.findAll(); // SELECT * from fnb
     }
     
 //    public List<Movie> searchFnbs(String title) {

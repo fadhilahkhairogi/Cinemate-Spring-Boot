@@ -4,7 +4,7 @@
       "genres": ["Horror"],
       "releaseDate": "2025-05-01",
       "duration": "120 mins",
-      "schedule": ["2025-05-01T00:00:00"],
+      "scheduleTime": ["2025-05-01T00:00:00"],
       "posterUrl": "/images/cinemate_movie.jpg",
       "description": "Film jumbo"
     },
@@ -13,7 +13,7 @@
       "genres": ["Action", "Adventure"],
       "releaseDate": "2025-08-21",
       "duration": "140 mins",
-      "schedule": [
+      "scheduleTime": [
         "2025-08-21T00:00:00",
         "2025-08-21T09:00:00"
       ],
@@ -25,7 +25,7 @@
       "genres": ["Fantasy", "Horror"],
       "releaseDate": "2025-11-11",
       "duration": "125 mins",
-      "schedule": ["2025-11-11T00:00:00"],
+      "scheduleTime": ["2025-11-11T00:00:00"],
       "posterUrl": "/images/cinemate_movie.jpg",
       "description": "Penyihir ahli waktu dan dunia paralel"
     },
@@ -34,7 +34,7 @@
       "genres": ["Animation"],
       "releaseDate": "2025-10-05",
       "duration": "90 mins",
-      "schedule": ["2025-10-05T10:30:00"],
+      "scheduleTime": ["2025-10-05T10:30:00"],
       "posterUrl": "/images/cinemate_movie.jpg",
       "description": "Mainan yang hidup saat manusia tak melihat"
     }

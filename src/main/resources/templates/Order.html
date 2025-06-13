@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cinemate - Booking</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    body {
+      background: radial-gradient(circle at top left, #002b4e, #001528);
+      background-image: url('./BG.png');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      font-family: 'Segoe UI', sans-serif;
+      color: white;
+    }
+
+    .navbar {
+      max-width: 1150px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+    
+    .ticket-container {
+      max-width: 1100px;
+      background: none;
+      background: linear-gradient(to bottom right, #00A3FB, #045797);
+      border-radius: 25px;
+      margin: auto;
+      padding: 15px 15px;
+      margin-bottom: 300px;
+      margin-top: 100px;
+    }
+
+    .left-panel {
+      background-color: #f4f4f4;
+      border-radius: 15px;
+      padding: 20px;
+      color: #000;
+    }
+
+    .right-panel {
+      background: transparent;
+      border-radius: 15px;
+      padding: 25px;
+    }
+
+    .form-control, .form-select {
+      border-radius: 10px;
+      font-weight: 500;
+    }
+
+    .btn-primary {
+      background: linear-gradient(to right, #00A3FB, #045797);
+      border: none;
+      border-radius: 10px;
+      box-shadow: -1px 0px 9px 0px rgba(0,0,0,0.51);
+      -webkit-box-shadow: -1px 0px 9px 0px rgba(0,0,0,0.51);
+      -moz-box-shadow: -1px 0px 9px 0px rgba(0,0,0,0.51);
+    }
+
+    .btn-primary:hover {
+      background: #045797;
+    }
+
+    .seat {
+      width: 20px;
+      height: 20px;
+      margin: 3px;
+      border-radius: 4px;
+      display: inline-block;
+    }
+
+    .seat.available { background: #D9D9D9; }
+    .seat.taken { background: #697079; }
+    .seat.selected { background: linear-gradient(to bottom right, #00A3FB, #045797); }
+
+    .seat-row {
+      display: flex;
+      align-items: center;
+    }
+
+    .seat-number {
+      display: flex;
+      font-weight: bold;
+      width: 25px;
+      height: 25px;
+      margin: 2px;
+      justify-content: center;
+    }
+
+    .seat-label {
+      width: 20px;
+      margin-right: 5px;
+      font-weight: bold;
+    }
+
+    .seat-checkbox {
+      width: 25px;
+      height: 25px;
+      margin: 2px;
+      appearance: none;
+      background-color: #D9D9D9;
+      border: 2px solid #c9c6c6;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .seat-checkbox:checked {
+      background: linear-gradient(to bottom right, #00A3FB, #045797);
+      border-color: #0077cc;
+    }
+
+    .seat-checkbox.taken {
+      background-color: #697079;
+      border-color: #595f66;
+      pointer-events: none;
+      cursor: not-allowed;
+    }
+
+    .screen-text {
+      text-align: center;
+      margin: 10px 0;
+      color: gray;
+      font-weight: bold;
+      background-color: #D9D9D9;
+      border-radius: 4px;
+    }
+
+    .divider-text {
+      text-align: center;
+      margin: 15px 0;
+      font-weight: bold;
+    }
+
+    .select {
+      background-color: #045797;
+      border-radius: 11px;
+      margin-bottom: 15px;
+      color: white;
+      padding-bottom: 10px;
+      box-shadow: -1px 0px 9px 0px rgba(0,0,0,0.51);
+      -webkit-box-shadow: -1px 0px 9px 0px rgba(0,0,0,0.51);
+      -moz-box-shadow: -1px 0px 9px 0px rgba(0,0,0,0.51);
+    }
+
+    .select1 {
+      background: linear-gradient(to right, #00A3FB, #045797);
+      width: 100%;
+      border-radius: 11px;
+      padding: 6px;
+    }
+
+    .navbar {
+      max-width: 1150px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+
+    a {
+      color: white;
+      text-decoration: none;
+    }
+
+    footer {
+      color: white;
+      padding: 50px 0;
+    }
+
+    .footer-container {
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .footer-logo img {
+      height: 60px;
+    }
+
+    .footer-link, .footer-contact, .footer-support {
+      font-size: 0.95rem;
+    }
+
+    .footer-link:hover, .footer-support a:hover {
+      text-decoration: underline;
+      cursor: pointer;
+      color: #f0f0f0;
+    }
+
+
+    .social-icons i {
+      font-size: 1.5rem;
+      margin-right: 15px;
+      color: white;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      margin-top: 100px;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- INI NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-dark px-4 py-3">
+    <div class="container-fluid">
+      <a class="navbar-brand d-flex align-items-center" href="#">
+        <img src="./CinemateLogo.png" alt="LogoCinemate" width="150" height="40" class="me-2">
+      </a>
+      
+      <!--MENU MOVIES-->
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-3">
+          <li class="nav-item">
+            <a class="nav-link active" href="#">Movies</a>
+          </li>
+        </ul>
+
+        <!--TOMBOL PROFILE-->
+        <form class="d-flex align-items-center">
+          <button class="btn btn-outline-light rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;" type="button">
+            <i class="bi bi-person fs-5"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+  </nav>
+  <!--END OF NAVBAR-->
+  <div class="container ticket-container">
+     <form th:action="@{/movie/{id}/order(id=${movie.movieId})}" method="post">
+    <div class="row g-4">
+      <!-- Left Panel: Seat Map -->
+      <div class="col-md-5">
+        <div class="left-panel">
+          <div class="select">
+            <label class="select1 form-label fw-bold mb-2"><svg class="me-2 bi bi-ticket" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M0 4.5A1.5 1.5 0 0 1 1.5 3h13A1.5 1.5 0 0 1 16 4.5V6a.5.5 0 0 1-.5.5 1.5 1.5 0 0 0 0 3 .5.5 0 0 1 .5.5v1.5a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 11.5V10a.5.5 0 0 1 .5-.5 1.5 1.5 0 1 0 0-3A.5.5 0 0 1 0 6zM1.5 4a.5.5 0 0 0-.5.5v1.05a2.5 2.5 0 0 1 0 4.9v1.05a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-1.05a2.5 2.5 0 0 1 0-4.9V4.5a.5.5 0 0 0-.5-.5z"/>
+            </svg>Select Tickets</label>
+            <div class="ms-2 me-2">
+              <select class="form-select" id ="ticketCount">
+                <option selected>None</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+                <option>11</option>
+                <option>12</option>
+                <option>13</option>
+                <option>14</option>
+                <option>15</option>
+              </select>
+            </div>
+            
+          </div>
+          
+
+          <div class="d-flex align-items-center gap-5 mb-2">
+            <div class="d-flex align-items-center fw-bold">
+              <span class="seat available"></span>
+              <small class="ms-2">Available</small>
+            </div>
+            <div class="d-flex align-items-center fw-bold">
+              <span class="seat taken"></span>
+              <small class="ms-2">Taken</small>
+            </div>
+            <div class="d-flex align-items-center fw-bold">
+              <span class="seat selected"></span>
+              <small class="ms-2">Selected</small>
+            </div>
+          </div>
+
+          <div class="screen-text">SCREEN</div>
+          
+
+          <!-- Seat Grid (A–G and 10 columns) -->
+          <div class="seat-map">
+            <input type="hidden" name="selectedSeats" id="selectedSeatsInput">
+          <!-- Row Labels -->
+            <div class="seat-row">
+              <div class="seat-label"></div>
+              <div class="seat-number">1</div>
+              <div class="seat-number">2</div>
+              <div class="seat-number">3</div>
+              <div class="seat-number"></div>
+              <div class="seat-number">4</div>
+              <div class="seat-number">5</div>
+              <div class="seat-number">6</div>
+              <div class="seat-number">7</div>
+              <div class="seat-number"></div>
+              <div class="seat-number">8</div>
+              <div class="seat-number">9</div>
+              <div class="seat-number">10</div>
+            </div>
+
+            <!-- Rows A–G -->
+            <div class="seat-row">
+              <div class="seat-label">A</div>
+              <input class="seat-checkbox" type="checkbox" data-seat="A1" value="A1" />
+              <input class="seat-checkbox" type="checkbox" data-seat="A2" value="A2" />
+              <input class="seat-checkbox" type="checkbox" data-seat="A3" value="A3" />
+              <div class="seat-number"></div>
+              <input class="seat-checkbox" type="checkbox" data-seat="A4" value="A4" />
+              <input class="seat-checkbox" type="checkbox" data-seat="A5" value="A5" />
+              <input class="seat-checkbox" type="checkbox" data-seat="A6" value="A6" />
+              <input class="seat-checkbox" type="checkbox" data-seat="A7" value="A7" />
+              <div class="seat-number"></div>
+              <input class="seat-checkbox" type="checkbox" data-seat="A8" value="A8" />
+              <input class="seat-checkbox" type="checkbox" data-seat="A9" value="A9" />
+              <input class="seat-checkbox" type="checkbox" data-seat="A10" value="A10" />
+            </div>
+            
+            <div class="seat-row">
+              <div class="seat-label">B</div>
+              <input class="seat-checkbox" type="checkbox" data-seat="B1" value="B1" />
+              <input class="seat-checkbox" type="checkbox" data-seat="B2" value="B2" />
+              <input class="seat-checkbox" type="checkbox" data-seat="B3" value="B3" />
+              <div class="seat-number"></div>
+              <input class="seat-checkbox" type="checkbox" data-seat="B4" value="B4" />
+              <input class="seat-checkbox" type="checkbox" data-seat="B5" value="B5" />
+              <input class="seat-checkbox" type="checkbox" data-seat="B6" value="B6" />
+              <input class="seat-checkbox" type="checkbox" data-seat="B7" value="B7" />
+              <div class="seat-number"></div>
+              <input class="seat-checkbox" type="checkbox" data-seat="B8" value="B8" />
+              <input class="seat-checkbox" type="checkbox" data-seat="B9" value="B9" />
+              <input class="seat-checkbox" type="checkbox" data-seat="B10" value="B10" />
+            </div>
+            
+            <div class="seat-row">
+              <div class="seat-label">C</div>
+              <input class="seat-checkbox" type="checkbox" data-seat="C1" value="C1" />
+              <input class="seat-checkbox" type="checkbox" data-seat="C2" value="C2" />
+              <input class="seat-checkbox" type="checkbox" data-seat="C3" value="C3" />
+              <div class="seat-number"></div>
+              <input class="seat-checkbox" type="checkbox" data-seat="C4" value="C4" />
+              <input class="seat-checkbox" type="checkbox" data-seat="C5" value="C5" />
+              <input class="seat-checkbox" type="checkbox" data-seat="C6" value="C6" />
+              <input class="seat-checkbox" type="checkbox" data-seat="C7" value="C7" />
+              <div class="seat-number"></div>
+              <input class="seat-checkbox" type="checkbox" data-seat="C8" value="C8" />
+              <input class="seat-checkbox" type="checkbox" data-seat="C9" value="C9" />
+              <input class="seat-checkbox" type="checkbox" data-seat="C10" value="C10" />
+            </div>
+            
+            <div class="seat-row">
+              <div class="seat-label">D</div>
+              <input class="seat-checkbox" type="checkbox" data-seat="D1" value="D1" />
+              <input class="seat-checkbox" type="checkbox" data-seat="D2" value="D2" />
+              <input class="seat-checkbox" type="checkbox" data-seat="D3" value="D3" />
+              <div class="seat-number"></div>
+              <input class="seat-checkbox" type="checkbox" data-seat="D4" value="D4" />
+              <input class="seat-checkbox" type="checkbox" data-seat="D5" value="D5" />
+              <input class="seat-checkbox" type="checkbox" data-seat="D6" value="D6" />
+              <input class="seat-checkbox" type="checkbox" data-seat="D7" value="D7" />
+              <div class="seat-number"></div>
+              <input class="seat-checkbox" type="checkbox" data-seat="D8" value="D8" />
+              <input class="seat-checkbox" type="checkbox" data-seat="D9" value="D9" />
+              <input class="seat-checkbox" type="checkbox" data-seat="D10" value="D10" />
+            </div>
+            
+            <div class="seat-row">
+              <div class="seat-label">E</div>
+              <input class="seat-checkbox" type="checkbox" data-seat="E1" value="E1" />
+              <input class="seat-checkbox" type="checkbox" data-seat="E2" value="E2" />
+              <input class="seat-checkbox" type="checkbox" data-seat="E3" value="E3" />
+              <div class="seat-number"></div>
+              <input class="seat-checkbox" type="checkbox" data-seat="E4" value="E4" />
+              <input class="seat-checkbox" type="checkbox" data-seat="E5" value="E5" />
+              <input class="seat-checkbox" type="checkbox" data-seat="E6" value="E6" />
+              <input class="seat-checkbox" type="checkbox" data-seat="E7" value="E7" />
+              <div class="seat-number"></div>
+              <input class="seat-checkbox" type="checkbox" data-seat="E8" value="E8" />
+              <input class="seat-checkbox" type="checkbox" data-seat="E9" value="E9" />
+              <input class="seat-checkbox" type="checkbox" data-seat="E10" value="E10" />
+            </div>
+            
+            <div class="seat-row">
+              <div class="seat-label">F</div>
+              <input class="seat-checkbox" type="checkbox" data-seat="F1" value="F1" />
+              <input class="seat-checkbox" type="checkbox" data-seat="F2" value="F2" />
+              <input class="seat-checkbox" type="checkbox" data-seat="F3" value="F3" />
+              <div class="seat-number"></div>
+              <input class="seat-checkbox" type="checkbox" data-seat="F4" value="F4" />
+              <input class="seat-checkbox" type="checkbox" data-seat="F5" value="F5" />
+              <input class="seat-checkbox" type="checkbox" data-seat="F6" value="F6" />
+              <input class="seat-checkbox" type="checkbox" data-seat="F7" value="F7" />
+              <div class="seat-number"></div>
+              <input class="seat-checkbox" type="checkbox" data-seat="F8" value="F8" />
+              <input class="seat-checkbox" type="checkbox" data-seat="F9" value="F9" />
+              <input class="seat-checkbox" type="checkbox" data-seat="F10" value="F10" />
+            </div>
+            
+            <div class="seat-row">
+              <div class="seat-label">G</div>
+              <input class="seat-checkbox" type="checkbox" data-seat="G1" value="G1" />
+              <input class="seat-checkbox" type="checkbox" data-seat="G2" value="G2" />
+              <input class="seat-checkbox" type="checkbox" data-seat="G3" value="G3" />
+              <div class="seat-number"></div>
+              <input class="seat-checkbox" type="checkbox" data-seat="G4" value="G4" />
+              <input class="seat-checkbox" type="checkbox" data-seat="G5" value="G5" />
+              <input class="seat-checkbox" type="checkbox" data-seat="G6" value="G6" />
+              <input class="seat-checkbox" type="checkbox" data-seat="G7" value="G7" />
+              <div class="seat-number"></div>
+              <input class="seat-checkbox" type="checkbox" data-seat="G8" value="G8" />
+              <input class="seat-checkbox" type="checkbox" data-seat="G9" value="G9" />
+              <input class="seat-checkbox" type="checkbox" data-seat="G10" value="G10" />
+            </div>
+            
+
+          </div>
+          <div class="d-flex justify-content-center">
+            <button class="btn btn-primary fw-bold w-50 mt-4">PICK SEAT</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Panel: Details -->
+      <div class="col-md-7">
+        <div class="right-panel">
+          <h1 class="fw-bold mb-3">Detail Tickets</h1>
+
+          <div class="mb-2">
+            <label class="form-label">Movie</label>
+            <input class="form-control" th:value="${movie.title}" readonly />
+          </div>
+
+          <div class="row g-3 mb-2">
+            <div class="col-md-6">
+              <label class="form-label" for="schedule" >Time</label>
+              <!-- <input type="date" class="form-control"/> -->
+                <select class="form-select" id="schedule" name="selectedSchedule" required>
+                  <option value="">None</option>
+                  <th:block th:each="schedule : ${schedules}">
+                    <option th:value="${schedule.time}" th:text="${#temporals.format(schedule.time, 'yyyy-MM-dd HH:mm')}"></option>
+                  </th:block>
+                </select>
+              </div>
+
+            <!-- <div class="col-md-6">
+              <label class="form-label">Schedule</label>
+              <select class="form-select">
+                <option selected>None</option>
+                <option>12:00</option>
+                <option>15:00</option>
+                <option>18:00</option>
+                <option>19:00</option>
+                <option>20:00</option>
+              </select>
+            </div> -->
+          </div>
+
+          <div class="row g-3 mb-4">
+            <div class="col-md-6">
+              <label class="form-label">Seat</label>
+              <input class="form-control" value="H4, H5, H6" readonly />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Estimated Price</label>
+              <input class="form-control" value="Rp. 90,000,00" readonly />
+            </div>
+          </div>
+
+          <div class="d-grid gap-2 mb-2">
+            <button class="btn btn-primary fw-bold">CHECKOUT</button>
+            <div class="divider-text fw-bold">OR</div>
+            <button class="btn btn-primary fw-bold">Add Food & Beverage</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    </form>
+  </div>
+
+  <!-- INI FOOTER -->
+  <footer>
+  <div class="footer-container">
+    <div class="row text-white">
+      <!-- Logo & Info -->
+      <div class="col-md-3 mb-4 footer-logo me-1">
+        <img src="./CinemateLogo.png" alt="Cinemate Logo" class="mb-2">
+        <p class="d-flex justify-content-center">ABSOLUTE CINEMA</p>
+      </div>
+
+      <!-- Movies & F&B -->
+      <div class="col-md-2 mb-4 ms-5">
+        <a href="#"><p class="footer-link">MOVIES</p></a>
+        <a href="#"><p class="footer-link">F&B</p></a>
+      </div>
+
+      <!-- CONTACT US, PRIVACY POLICY, TERMS & CONDITIONS -->
+      <div class="col-md-3 mb-4 ms-4">
+        <a href="#"><p class="footer-link">CONTACT US</p></a>
+        <a href="#"><p class="footer-link">PRIVACY POLICY</p></a>
+        <a href="#"><p class="footer-link">TERMS & CONDITIONS</p></a>
+      </div>
+
+      <!-- Support & Social -->
+      <div class="col-md-3 mb-4 ms-3">
+        <p class="footer-support fw-bold">CINEMATE SUPPORT</p>
+        <p class="footer-support"><i class="fa-solid fa-square-envelope me-2"></i>Cinemate@gmail.com</p>
+        <p class="footer-support mb-2 fw-bold">FOLLOW US ON</p>
+        <div class="social-icons">
+          <a href="#" aria-label="Instagram"><i class="fa-brands fa-square-instagram"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fa-brands fa-square-youtube"></i></a>
+          <a href="#" aria-label="Facebook"><i class="fa-brands fa-square-facebook"></i></a>
+          <a href="#" aria-label="Twitter"><i class="fa-brands fa-square-x-twitter"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <!--TRADEMARK-->
+    <div class="footer-bottom">
+      COPYRIGHT © <strong>CINEMATE</strong> 2025. ALL RIGHT RESERVED
+    </div>
+
+  </div>
+  </footer>
+  
+  <!--END OF FOOTER-->
+</body>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const timeSelect = document.querySelector('#schedule');
+    const ticketSelect = document.querySelector('#ticketCount');
+    const seatMap = document.querySelector('.seat-map');
+
+    ticketSelect.disabled = true;
+    seatMap.style.pointerEvents = "none";
+    seatMap.style.opacity = "0.5";
+
+    timeSelect.addEventListener('change', function () {
+      const selectedScheduleId = timeSelect.value;
+
+      if (selectedScheduleId && selectedScheduleId !== "") {
+        ticketSelect.disabled = false;
+
+        // Clear any previously selected seats
+        document.querySelectorAll('.seat-checkbox').forEach(cb => {
+          cb.checked = false;
+        });
+
+        // Fetch new seat availability
+        fetch(`/api/schedules/${encodeURIComponent(selectedScheduleId)}/seats`)
+          .then(res => res.json())
+          .then(seats => {
+            document.querySelectorAll('.seat-checkbox').forEach(checkbox => {
+              const seatId = checkbox.dataset.seat;
+              if (seatId && seats[seatId] === false) {
+                checkbox.disabled = true;
+                checkbox.classList.add('taken');
+              } else {
+                checkbox.disabled = false;
+                checkbox.classList.remove('taken');
+              }
+            });
+          });
+      } else {
+        ticketSelect.disabled = true;
+        seatMap.style.pointerEvents = "none";
+        seatMap.style.opacity = "0.5";
+      }
+    });
+
+    ticketSelect.addEventListener('change', function () {
+      if (ticketSelect.value !== "None" && ticketSelect.value !== "") {
+        seatMap.style.pointerEvents = "auto";
+        seatMap.style.opacity = "1";
+      } else {
+        seatMap.style.pointerEvents = "none";
+        seatMap.style.opacity = "0.5";
+      }
+    });
+
+
+
+    const form = document.querySelector("form");
+    const selectedSeatsInput = document.getElementById("selectedSeatsInput");
+
+    form.addEventListener("submit", function () {
+      const selectedSeats = Array.from(document.querySelectorAll(".seat-checkbox:checked"))
+        .map(cb => cb.getAttribute("data-seat"));
+      selectedSeatsInput.value = selectedSeats.join(",");
+    });
+  });
+</script>
+
+  
+</html>

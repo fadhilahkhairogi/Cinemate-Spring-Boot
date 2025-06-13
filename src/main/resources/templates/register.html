@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Register</title>
+    <link rel="stylesheet" href="./register.css">
+</head>
+<body style="background-color: #0a1a2a;">
+    <div class="container">
+        <section class="register-container">
+            <h2>Register</h2>
+            <form method="get" action="">
+                <div class="container-input-nama">
+                    <div>
+                        <label for="nama-depan">First Name</label>
+                        <input type="text" id="nama-depan" class="nama-depan" name="nama-depan" placeholder="Enter your First Name" required>
+                    </div>
+                    <div>
+                        <label for="nama-belakang">Last Name</label>
+                        <input type="text" id="nama-belakang" class="nama-belakang" name="nama-belakang" placeholder="Enter your First Name" required>
+                    </div>
+                </div>
+                <div class="container-input">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" class="email" name="email" placeholder="Enter your Email" required>
+                </div>
+                <div class="container-input">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" class="password" name="password" placeholder="Enter your Password" required>
+                </div>
+                <div class="container-input">
+                    <label for="confirm-password">Confirm Password</label>
+                    <input type="password" id="confirm-password" class="confirm-password" name="confirm-password" placeholder="Enter your password" required>
+                </div>
+                <p class="terms">By continuing, you agree to Cinemate's <a href="#">Terms of Service</a> and acknowledge you've read our <a href="#">Privacy Policy</a>.</p>
+                <button class="btn-continue" type="submit">Continue</button>
+                <div class="or-separator">OR</div>
+                <button class="btn-google" type="button">
+                    <span class="google-icon">G</span> Continue with Google
+                </button>
+                <p class="login-link">Already have an account? <a href="#">Log In</a></p>
+            </form>
+        </section>
+        <section class="description">
+            <img src="./img/logo.png" alt="Logo">
+            <p>Selamat datang di <b>CINEMATE!</b> Temukan jadwal film terbaru, pilih kursi favoritmu, dan pesan tiket dengan mudah. Masuk sekarang untuk mulai petualangan menontonmu.</p>
+        </section>
+    </div>
+</body>
+</html>

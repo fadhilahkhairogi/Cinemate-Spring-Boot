@@ -17,7 +17,7 @@ public class SeatController {
     private SeatService seatService;
 
     @GetMapping
-    public List<Seat> getSeats(@PathVariable String movieId,
+    public List<Seat> getSeats(@PathVariable Long movieId,
                                @RequestParam("scheduleTime") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime scheduleTime) {
         return seatService.getSeatsByMovieAndSchedule(movieId, scheduleTime);
     }

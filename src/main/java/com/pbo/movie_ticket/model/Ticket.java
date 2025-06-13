@@ -13,19 +13,18 @@ public class Ticket {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @Column(name = "ticket_id")
+    private int ticketId;
 
     private int nomorKursi;
     private int harga;
     private int jamTayang;
     private int price;
 
-    // Constructors
     public Ticket() {}
 
-    // Getters
-    public int getId() {
-        return id;
+    public int getTicketId() {
+        return ticketId;
     }
 
     public int getNomorKursi() {
@@ -45,8 +44,8 @@ public class Ticket {
     }
 
     // Setters
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int ticketId) {
+        this.ticketId = ticketId;
     }
 
     public void setNomorKursi(int nomorKursi) {

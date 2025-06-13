@@ -6,8 +6,10 @@ package com.pbo.movie_ticket.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pbo.movie_ticket.model.Movie;
+import com.pbo.movie_ticket.model.Schedule;
 import com.pbo.movie_ticket.repository.MovieRepository;
 import java.io.InputStream;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import org.springframework.boot.CommandLineRunner;
@@ -35,8 +37,21 @@ public class MovieDataLoader implements CommandLineRunner {
             System.out.println("ERROR: moviesData.json not found!");
             return;
         }
+
         List<Movie> movies = Arrays.asList(objectMapper.readValue(is, Movie[].class));
+
+        for (Movie movie : movies) {
+            if (movie.getScheduleTime() != null) {
+                for (LocalDateTime time : movie.getScheduleTime()) {
+                    Schedule schedule = new Schedule(time, movie);
+                    movie.getSchedule().add(schedule);
+                    // schedule.setMovie(movie);
+                }
+            }
+        }
+
         movieRepository.saveAll(movies);
-        
     }
+
+
 }

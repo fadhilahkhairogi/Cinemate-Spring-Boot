@@ -11,12 +11,16 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.MapKeyColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 @Entity
 @Table(name = "movie")
@@ -26,7 +30,7 @@ public class Movie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "movie_id")
     private Long movieId;
-
+    
     @Column(name = "title")
     private String title;
 
@@ -42,21 +46,62 @@ public class Movie {
     @Column(name = "duration")
     private String duration;
     
-    @ElementCollection
-    @CollectionTable(name = "movie_schedule", joinColumns = @JoinColumn(name = "movie_id"))
-    @Column(name = "scheduled_time")
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
-    private List<LocalDateTime> schedule;
-    
     @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Seat> seats = new ArrayList<>();
+    private List<Schedule> schedule = new ArrayList<>();
+    
+    @Transient
+    private List<LocalDateTime> scheduleTime;
+
+
 
     @Column(name = "poster_url")
     private String posterUrl;
     
     @Column(name = "description", columnDefinition = "TEXT") 
     private String description;
+    
+    public Movie(){
+//        initializeSeats();
+    }
+    
+    public Movie(String title, List<String> genres, LocalDate releaseDate, String duration,
+                 List<Schedule> schedule, String posterUrl, String description) {
+        this.title = title;
+        this.genres = genres;
+        this.releaseDate = releaseDate;
+        this.duration = duration;
+        this.schedule = schedule;
+        this.posterUrl = posterUrl;
+        this.description = description;
+//        initializeSeats();
+    }
 
+    public List<LocalDateTime> getScheduleTime() {
+        return scheduleTime;
+    }
+
+    public void setScheduleTime(List<LocalDateTime> scheduleTime) {
+        this.scheduleTime = scheduleTime;
+    }
+    
+    public List<Schedule> getSchedule() {
+        return schedule;
+    }
+
+    public void setSchedule(List<Schedule> schedule) {
+        this.schedule = schedule;
+    }
+    
+//    private void initializeSeats() {
+//        for (char row = 'A'; row <= 'K'; row++) {
+//            for (int col = 1; col <= 13; col++) {
+//                String seat = row + String.valueOf(col);
+//                seats.put(seat, true); // all seats available initially
+//            }
+//        }
+//    }
+    
+    
 
     public Long getMovieId() {
         return movieId;
@@ -106,21 +151,16 @@ public class Movie {
         this.posterUrl = posterUrl;
     }
 
-    public List<LocalDateTime> getSchedule() {
-        return schedule;
-    }
 
-    public void setSchedule(List<LocalDateTime> schedule) {
-        this.schedule = schedule;
-    }
 
-    public List<Seat> getSeats() {
-        return seats;
-    }
+//    public Map<String, Boolean> getSeats() {
+//        return seats;
+//    }
+//
+//    public void setSeats(Map<String, Boolean> seats) {
+//        this.seats = seats;
+//    }
 
-    public void setSeats(List<Seat> seats) {
-        this.seats = seats;
-    }
 
     public String getDescription() {
         return description;
