@@ -25,29 +25,33 @@ public class MovieService {
         return movieRepository.findAll();
     }
     
-    public List<Movie> searchMovies(String title) {
-        return movieRepository.findByTitleContainingIgnoreCase(title.trim());
+    public List<Movie> searchMovies(String name) {
+        return movieRepository.findByNameContainingIgnoreCase(name.trim());
     }
     
     public List<Movie> filterGenreMovies(String genre) {
         return movieRepository.findByGenre(genre.trim());
     }
 
-    // Add a new movie
     public Movie addMovie(Movie movie) {
         return movieRepository.save(movie);
     }
 
-    // Delete a movie
+
     public void deleteMovie(Long movieId) {
         movieRepository.deleteById(movieId);
     }
 
-    // Find a movie by ID
+
     public Movie getMovieById(Long movieId) {
         return movieRepository.findById(movieId)
                .orElseThrow(() -> new RuntimeException("Movie not found with ID: " + movieId));
     }
+    
+    
+//    public String joinList(List<String> list){
+//        return String.join("/", list); 
+//    }
     
 //    public boolean isSeatAvailable(Long movieId, String seatNumber) {
 //        Movie movie = movieRepository.findById(movieId);

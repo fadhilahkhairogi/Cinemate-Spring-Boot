@@ -2,15 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package com.pbo.movie_ticket.repository;
+package com.pbo.movie_ticket.model;
 
-import com.pbo.movie_ticket.model.Ticket;
-import org.springframework.data.jpa.repository.JpaRepository;
-
+import java.util.List;
 
 /**
  *
  * @author Asus
  */
-public interface TicketRepository extends JpaRepository<Ticket, Integer> {
+interface ListStringable {
+    public String ListToString(List<String> list);
 }

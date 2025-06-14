@@ -11,16 +11,12 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "fnb")
-public class Fnb {
+public class Fnb extends Product{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "fnb_id")
     private Long fnbId;
-
-    @Column(name = "name")
-    private String name;
-
 
     @Column(name = "type")
     private String type;
@@ -28,11 +24,6 @@ public class Fnb {
     @Column(name = "price")
     private Integer price;
 
-    @Column(name = "poster_url")
-    private String posterUrl;
-    
-    @Column(name = "description", columnDefinition = "TEXT") 
-    private String description;
 
     public Long getFnbId() {
         return fnbId;
@@ -42,13 +33,7 @@ public class Fnb {
         this.fnbId = fnbId;
     }
 
-    public String getName() {
-        return name;
-    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getType() {
         return type;
@@ -64,23 +49,6 @@ public class Fnb {
 
     public void setPrice(Integer price) {
         this.price = price;
-    }
-
-
-    public String getPosterUrl() {
-        return posterUrl;
-    }
-
-    public void setPosterUrl(String posterUrl) {
-        this.posterUrl = posterUrl;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
 

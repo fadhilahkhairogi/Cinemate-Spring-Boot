@@ -1,6 +1,5 @@
 package com.pbo.movie_ticket.controller;
 
-import com.pbo.movie_ticket.model.Seat;
 import com.pbo.movie_ticket.service.ScheduleService;
 import java.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;

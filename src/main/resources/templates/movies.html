@@ -360,15 +360,15 @@
 <!-- Movie Grid -->
 <div class="movie-grid mt-3">
   <div class="movie-card" th:each="movie : ${movies}" tabindex="0"
-       th:aria-label="${movie.title} + ' - ' + ${#strings.arrayJoin(movie.genres, ', ')} + ' - ' + ${movie.duration}">
+       th:aria-label="${movie.name} + ' - ' + ${#strings.arrayJoin(movie.genres, ', ')} + ' - ' + ${movie.duration}">
        <div class="poster-container">
         <a th:href="@{'/movies/' + ${movie.movieId}}">
-          <img th:src="@{${movie.posterUrl}}" th:alt="${movie.title}" class="movie-poster" />
-          <div class="overlay-title" th:text="${movie.title}">Movie Title</div>
+          <img th:src="@{${movie.posterUrl}}" th:alt="${movie.name}" class="movie-poster" />
+          <div class="overlay-title" th:text="${movie.name}">Movie Title</div>
         </a>
       </div>
     <div class="movie-info">
-      <!-- <div class="title" th:text="${movie.title}">Movie Title</div> -->
+      <!-- <div class="title" th:text="${movie.name}">Movie Title</div> -->
       <div class="details">
         <span class="genre" th:text="${#strings.arrayJoin(movie.genres.subList(0, T(java.lang.Math).min(2, movie.genres.size())), '/')}">Genre</span>
         <span class="duration" th:text="${movie.duration}">1h 45m</span>

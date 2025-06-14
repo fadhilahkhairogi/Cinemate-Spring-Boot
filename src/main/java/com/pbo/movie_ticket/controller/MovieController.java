@@ -13,7 +13,7 @@ import org.springframework.stereotype.Controller;
 
 @Controller
 @RequestMapping("/movies")
-public class MovieController {
+public class MovieController  {
 
     private final MovieService movieService;
 
@@ -22,28 +22,27 @@ public class MovieController {
         this.movieService = movieService;
     }
 
-    // Return Thymeleaf HTML view (GET /movies/view)
 @GetMapping("/view")
-public String showMoviesPage(
+public String showMoviesPage (
     @RequestParam(value = "filter-genre", required = false) String genre,
-    @RequestParam(value = "title", required = false) String title,
+    @RequestParam(value = "title", required = false) String name,
     Model model) {
 
     List<Movie> movies;
 
     boolean hasGenre = genre != null && !genre.isBlank();
-    boolean hasTitle = title != null && !title.isBlank();
+    boolean hasName = name != null && !name.isBlank();
 
-    if (hasGenre && hasTitle) {
+    if (hasGenre && hasName) {
 
-        List<Movie> byTitle = movieService.searchMovies(title.trim());
-        movies = byTitle.stream()
+        List<Movie> byName = movieService.searchMovies(name.trim());
+        movies = byName.stream()
                 .filter(m -> m.getGenres().stream()
                         .anyMatch(g -> g.equalsIgnoreCase(genre.trim())))
                 .toList();
 
         if (movies.isEmpty()) {
-            model.addAttribute("message", "No movies found matching title '" + title + "' and genre '" + genre + "'.");
+            model.addAttribute("message", "No movies found matching title '" + name + "' and genre '" + genre + "'.");
             movies = movieService.getAllMovies();
         }
 
@@ -54,10 +53,10 @@ public String showMoviesPage(
             movies = movieService.getAllMovies();
         }
 
-    } else if (hasTitle) {
-        movies = movieService.searchMovies(title.trim());
+    } else if (hasName) {
+        movies = movieService.searchMovies(name.trim());
         if (movies.isEmpty()) {
-            model.addAttribute("message", "No movies found for title: " + title);
+            model.addAttribute("message", "No movies found for title: " + name);
             movies = movieService.getAllMovies();
         }
 
@@ -69,20 +68,7 @@ public String showMoviesPage(
     return "movies";
 }
 
-    // REST API — Get a movie by ID (JSON)
-//    @GetMapping("/{movieId}")
-//    @ResponseBody
-//    public Movie getMovieById(@PathVariable String movieId) {
-//        return movieService.getMovieById(movieId);
-//        
-//    }
-    
-//    @GetMapping("/{movieId}/view")
-//    public String showMovieDetailPage(@PathVariable String movieId, Model model) {
-//        Movie movie = movieService.getMovieById(movieId);
-//        model.addAttribute("movie", movie);
-//        return "movie-detail"; 
-//    }
+
     @GetMapping("/{movieId}")
     public String getMovieDetail(@PathVariable Long movieId, Model model) {
         try {
@@ -143,7 +129,7 @@ public String showMoviesPage(
     
     
 
-        // REST API — Add a new movie (JSON)
+
 //    @PostMapping
 //    @ResponseBody
 //    public Movie addMovie(@RequestBody Movie movie) {

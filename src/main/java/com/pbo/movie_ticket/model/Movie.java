@@ -24,15 +24,13 @@ import java.util.Map;
 
 @Entity
 @Table(name = "movie")
-public class Movie {
+public class Movie extends Product implements ListStringable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "movie_id")
     private Long movieId;
     
-    @Column(name = "title")
-    private String title;
 
     @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "movie_genres", joinColumns = @JoinColumn(name = "movie_id"))
@@ -51,28 +49,24 @@ public class Movie {
     
     @Transient
     private List<LocalDateTime> scheduleTime;
-
-
-
-    @Column(name = "poster_url")
-    private String posterUrl;
     
-    @Column(name = "description", columnDefinition = "TEXT") 
-    private String description;
-    
+    @Transient
+    private String genresString;
+
     public Movie(){
 //        initializeSeats();
     }
     
-    public Movie(String title, List<String> genres, LocalDate releaseDate, String duration,
+    public Movie(String name, List<String> genres, LocalDate releaseDate, String duration,
                  List<Schedule> schedule, String posterUrl, String description) {
-        this.title = title;
+        this.name = name;
         this.genres = genres;
         this.releaseDate = releaseDate;
         this.duration = duration;
         this.schedule = schedule;
         this.posterUrl = posterUrl;
         this.description = description;
+        setGenresString();
 //        initializeSeats();
     }
 
@@ -102,6 +96,17 @@ public class Movie {
 //    }
     
     
+    @Override
+    public String ListToString(List<String> list) {
+        return String.join("/", list);
+    }
+    public String getGenresString() {
+        return genresString;
+    }
+
+    public void setGenresString() {
+        this.genresString = ListToString(genres);;
+    }
 
     public Long getMovieId() {
         return movieId;
@@ -111,13 +116,6 @@ public class Movie {
         this.movieId = movieId;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
 
     public List<String> getGenres() {
         return genres;
@@ -143,13 +141,7 @@ public class Movie {
         this.duration = duration;
     }
 
-    public String getPosterUrl() {
-        return posterUrl;
-    }
 
-    public void setPosterUrl(String posterUrl) {
-        this.posterUrl = posterUrl;
-    }
 
 
 
@@ -162,12 +154,6 @@ public class Movie {
 //    }
 
 
-    public String getDescription() {
-        return description;
-    }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
     
 }

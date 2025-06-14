@@ -18,32 +18,8 @@ public class FnbService {
         this.fnbRepository = fnbRepository;
     }
 
-    // Retrieve all movies
     public List<Fnb> getAllFnbs() {
         return fnbRepository.findAll(); // SELECT * from fnb
     }
     
-//    public List<Movie> searchFnbs(String title) {
-//        return fnbRepository.findByTitleContainingIgnoreCase(title.trim());
-//    }
-    
-//    public List<Movie> filterGenreMovies(String genre) {
-//        return movieRepository.findByGenre(genre.trim());
-//    }
-
-    // Add a new movie
-//    public Movie addMovie(Movie movie) {
-//        return movieRepository.save(movie);
-//    }
-//
-//    // Delete a movie
-//    public void deleteMovie(String movieId) {
-//        movieRepository.deleteById(movieId);
-//    }
-//
-//    // Find a movie by ID
-//    public Movie getMovieById(String movieId) {
-//        return movieRepository.findById(movieId)
-//               .orElseThrow(() -> new RuntimeException("Movie not found with ID: " + movieId));
-//    }
 }

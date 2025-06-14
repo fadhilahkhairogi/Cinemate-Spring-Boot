@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class OrderService {
+public class OrderService{
 
     private final OrderRepository orderRepository;
 
@@ -54,6 +54,9 @@ public class OrderService {
     public List<Order> getAllOrders() {
         return orderRepository.findAll();
     }
-
+    
+    public String joinList(List<String> list){
+        return String.join(", ", list); 
+    }
 
 }

@@ -3,13 +3,12 @@ package com.pbo.movie_ticket.model;
 
 
 import jakarta.persistence.*;
-import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
 @Table(name = "orders") 
-public class Order {
+public class Order implements ListStringable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,12 +29,16 @@ public class Order {
     @Column(name = "seat")
     private List<String> selectedSeats;
 
+    @Transient
+    private String selectedSeatsString;
+    
     public Order() {}
 
     public Order(Movie movie, LocalDateTime selectedSchedule, List<String> selectedSeats) {
         this.movie = movie;
         this.selectedSchedule = selectedSchedule;
         this.selectedSeats = selectedSeats;
+        setSelectedSeatsString();
 //        this.price = calculatePrice(selectedSchedule);
     }
 
@@ -44,6 +47,21 @@ public class Order {
 //        return (day == DayOfWeek.SATURDAY || day == DayOfWeek.SUNDAY) ? 50000 : 35000;
 //    }
 
+    public String getSelectedSeatsString() {
+        return selectedSeatsString;
+    }
+    
+    
+    public void setSelectedSeatsString() {
+        this.selectedSeatsString = ListToString(selectedSeats);
+    }
+    
+    
+    @Override
+    public String ListToString(List<String> list) {
+        return String.join(", ", list);
+    }
+    
     public void setPrice(Integer price) {
         this.price = price;
     }

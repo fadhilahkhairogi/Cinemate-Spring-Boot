@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 public interface MovieRepository extends JpaRepository<Movie, Long> {
-    List<Movie> findByTitleContainingIgnoreCase(String title);
+    List<Movie> findByNameContainingIgnoreCase(String name);
      
     @Query("SELECT m FROM Movie m JOIN m.genres g WHERE LOWER(g) LIKE LOWER(CONCAT('%', :genre, '%'))")
     List<Movie> findByGenre(@Param("genre") String genre);
