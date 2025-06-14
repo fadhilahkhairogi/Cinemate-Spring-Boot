@@ -52,13 +52,16 @@ public class Movie extends Product implements ListStringable {
     
     @Transient
     private String genresString;
+    
+    @Column(name = "age")
+    private String age;
 
     public Movie(){
 //        initializeSeats();
     }
     
     public Movie(String name, List<String> genres, LocalDate releaseDate, String duration,
-                 List<Schedule> schedule, String posterUrl, String description) {
+                 List<Schedule> schedule, String posterUrl, String description, String age) {
         this.name = name;
         this.genres = genres;
         this.releaseDate = releaseDate;
@@ -66,6 +69,7 @@ public class Movie extends Product implements ListStringable {
         this.schedule = schedule;
         this.posterUrl = posterUrl;
         this.description = description;
+        this.age=age;
         setGenresString();
 //        initializeSeats();
     }
@@ -94,6 +98,14 @@ public class Movie extends Product implements ListStringable {
 //            }
 //        }
 //    }
+
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
+    }
     
     
     @Override

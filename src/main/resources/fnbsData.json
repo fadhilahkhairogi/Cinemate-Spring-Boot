@@ -1,72 +1,107 @@
 [
   {
-    "name": "Popcorn Caramel",
-    "type": "Snack",
+    "name": "Popcorn Caramel + Cola",
+    "type": "Combo",
     "price": 25000,
-    "posterUrl": "/images/cinemate_movie.jpg",
-    "description": "Sedap"
+    "posterUrl": "/images/PopcornCaramelCola.png",
+    "description": "1 Popcorn Caramel (M) + 1 Cola (R)"
+  },
+  {
+    "name": "Burger Mini + Teh Manis",
+    "type": "Combo",
+    "price": 30000,
+    "posterUrl": "/images/BurgerTeh.png",
+    "description": "1 Burger Mini + 1 Teh Manis (R)"
+  },
+  {
+    "name": "Hotdog Mini + Lemon Tea",
+    "type": "Combo",
+    "price": 29000,
+    "posterUrl": "/images/HotdogLemonTea.png",
+    "description": "1 Hotdog Mini + 1 Lemon Tea (R)"
+  },
+  {
+    "name": "Milkshake Cokelat + Fries",
+    "type": "Combo",
+    "price": 25000,
+    "posterUrl": "/images/MilkshakeFries.png",
+    "description": "1 Milkshake Cokelat (R) + 1 French Fries (R)"
+  },
+  {
+    "name": "Popcorn Butter + Cola",
+    "type": "Combo",
+    "price": 27000,
+    "posterUrl": "/images/PopcornButterCola.png",
+    "description": "1 Popcorn Butter (M) + 1 Cola (R)"
   },
   {
     "name": "Popcorn Butter",
     "type": "Snack",
     "price": 22000,
-    "posterUrl": "/images/cinemate_movie.jpg",
-    "description": "Sedap"
-  },
-  {
-    "name": "Cola Regular",
-    "type": "Drink",
-    "price": 15000,
-    "posterUrl": "/images/cinemate_movie.jpg",
-    "description": "Segar"
-  },
-  {
-    "name": "Cola Large",
-    "type": "Drink",
-    "price": 20000,
-    "posterUrl": "/images/cinemate_movie.jpg",
-    "description": "Segar"
-  },
-  {
-    "name": "Teh Manis",
-    "type": "Drink",
-    "price": 12000,
-    "posterUrl": "/images/cinemate_movie.jpg",
-    "description": "Segar"
-  },
-  {
-    "name": "Air Mineral",
-    "type": "Drink",
-    "price": 10000,
-    "posterUrl": "/images/cinemate_movie.jpg",
-    "description": "Segar"
-  },
-  {
-    "name": "Burger Mini",
-    "type": "Snack",
-    "price": 30000,
-    "posterUrl": "/images/cinemate_movie.jpg",
-    "description": "Sedap"
+    "posterUrl": "/images/PopcornButter.png",
+    "description": "1 Popcorn Butter (M)"
   },
   {
     "name": "Sosis Bakar",
     "type": "Snack",
     "price": 18000,
-    "posterUrl": "/images/cinemate_movie.jpg",
-    "description": "Sedap"
+    "posterUrl": "/images/Sosis.png",
+    "description": "1 Sosis Bakar (R)"
   },
   {
     "name": "French Fries Regular",
     "type": "Snack",
     "price": 20000,
-    "posterUrl": "/images/cinemate_movie.jpg",
-    "description": "Sedap"
+    "posterUrl": "/images/FrenchFries.png",
+    "description": "1 French Fries (R)"
   },
   {
     "name": "French Fries Large",
     "type": "Snack",
     "price": 24000,
-    "posterUrl": "/images/cinemate_movie.jpg",
-    "description": "Sedap"
+    "posterUrl": "/images/FrenchFries.png",
+    "description": "1 French Fries (L)"
+  },
+  {
+    "name": "Nachos Cheese",
+    "type": "Snack",
+    "price": 27000,
+    "posterUrl": "/images/Nachos.png",
+    "description": "1 Porsi Nachos dengan Keju"
+  },
+  {
+    "name": "Cola Regular",
+    "type": "Drink",
+    "price": 15000,
+    "posterUrl": "/images/Cola.png",
+    "description": "1 Cola (R)"
+  },
+  {
+    "name": "Teh Manis",
+    "type": "Drink",
+    "price": 12000,
+    "posterUrl": "/images/Teh.png",
+    "description": "1 Teh Manis (R)"
+  },
+  {
+    "name": "Air Mineral",
+    "type": "Drink",
+    "price": 10000,
+    "posterUrl": "/images/air.png",
+    "description": "1 Air Mineral (R)"
+  },
+  {
+    "name": "Lemon Tea",
+    "type": "Drink",
+    "price": 14000,
+    "posterUrl": "/images/LemonTea.png",
+    "description": "1 Lemon Tea (R)"
+  },
+  {
+    "name": "Kopi Susu",
+    "type": "Drink",
+    "price": 22000,
+    "posterUrl": "/images/KopiSusu.png",
+    "description": "1 Kopi Susu (R)"
   }
 ]
